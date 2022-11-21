@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <title>Document</title>
+
+    <style>
+        h1 {
+            color: red;
+        }
+
+        #taskForm {
+            border: 1px blue solid;
+            padding: 1em;
+        }
+
+        .important {
+            text-decoration: underline;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1 class="important">Coucou</h1>
+    <!-- DOM: Document Object Model -->
+    <form action="" id="taskForm">
+        <div>
+            <input type="text" id="newTask" />
+            <button id="addButton">Add</button>
+        </div>
+        <ul id="taskList">
+        </ul>
+    </form>
+
+    <script src="todo.js"></script>
+</body>
+
+</html>
