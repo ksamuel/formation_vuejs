@@ -12,7 +12,7 @@
 
 // toujours utiliser le ===, jamais le ==
 
-// utilisez le descructuring:
+// utilisez le destructuring:
 
 // let person  = {nom: "kevin", age: 37, metier: "formateur"}
 // let {nom, age} = person 
@@ -33,6 +33,7 @@
 // pour tout filtre utilisez filter() directement:
 // nombres.filter(n => n !== 0)
 
+
 let form = document.getElementById("taskForm")
 // form = document.getElementById("taskForm"); // c'est mal !
 let input = document.getElementById("newTask")
@@ -46,3 +47,4 @@ form.addEventListener("submit", (event) => {
     ul.appendChild(li)
     input.value = ""
 }) // callback sur un evenement
+

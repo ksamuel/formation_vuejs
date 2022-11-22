@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Todo Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <style>
+        .done {
+            text-decoration: line-through;
+            color: grey;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <form action="" @submit.prevent="addTask()">
+            <p>
+                <input type="text" v-model="newTask">
+                <button>Add</button>
+            </p>
+        </form>
+        <ul>
+            <li v-for="task in filteredTasks">
+                <task :key="task.uid" :text="task.text" :done="task.done" :toggle="onCheck" :uid="task.uid"></task>
+            </li>
+        </ul>
+        <p>
+            Filter: <input type="text" v-model="filter">
+        </p>
+    </div>
+
+
+
+    <script>
+        let app = Vue.createApp({
+            data() {
+                return {
+                    tasks: [
+                        { text: "Acheter du lait", done: false, uid: -1 },
+                        { text: "Faire la lessive", done: false, uid: -2 },
+                    ],
+                    newTask: "",
+                    filter: "",
+                    lastId: 0,
+                }
+            },
+            methods: {
+                addTask() {
+
+                    if (this.newTask) {
+                        this.lastId++
+                        this.tasks.push({
+                            text: this.newTask,
+                            done: false,
+                            uid: this.lastId
+                        })
+                        this.newTask = ""
+                    }
+                },
+                onCheck(uid) {
+                    let task = this.tasks.find(task => task.uid === uid)
+                    task.done = !task.done
+                }
+            },
+            computed: {
+                filteredTasks() {
+                    console.log([...this.tasks])
+                    if (!this.filter) {
+                        return this.tasks
+                    }
+
+                    return this.tasks.filter((t) => t.text.toLowerCase().includes(this.filter.toLowerCase()))
+                }
+            }
+        })
+
+        app.component("task", {
+            props: {
+                text: {
+                    type: String,
+                    required: true
+                },
+                done: {
+                    type: Boolean,
+                    required: true
+                },
+                toggle: {
+                    type: Function,
+                    required: true
+                },
+                uid: {
+                    type: Number,
+                    required: true
+                }
+            },
+            template: `
+                <li>
+                    <input type="checkbox" :value="done"  :checked="done"  @change="toggle(uid)"  />
+                    <label :class="{done: done}">{{text}}</label>
+                </li>
+            `
+        })
+
+        app.mount('#app')
+
+
+    </script>
+</body>
+
+</html>
