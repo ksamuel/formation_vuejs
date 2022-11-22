@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Boucles en v2</title>
+    <script src="vue2.js"></script>
+
+
+</head>
+
+
+<body>
+    <div id="app">
+        <p>Nombres:</p>
+        <ul>
+            <li v-for="i in 5">
+                Le numero est: {{i}}
+            </li>
+        </ul>
+        <p>Fruits:</p>
+        <ul>
+            <li v-for="fr, index in fruits">
+                [{{index + 1}}] - Manger, ceci est mon fruit: {{ fr }}
+            </li>
+        </ul>
+        <p>Liste modifiée en temps reel:</p>
+        <ul>
+            <li v-for="element in liste">
+                {{element}}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                fruits: ["pommes", "bananes", "poires", "fraises", "kiwis"],
+                liste: ['Premier élément']
+
+            }
+        })
+
+        setInterval(() => {
+            app.liste.push('... et un autre!')
+            Vue.set(app.liste, 0, "Tout le monde peut changer !")
+        }, 1000)
+
+    </script>
+</body>
+
+</html>

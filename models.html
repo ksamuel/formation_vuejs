@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Models</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<!-- Faire la todo list avec vuejs 
+
+-->
+
+<body>
+    <div id="app">
+        <form action="">
+            <input type="number" v-model="premierNombre"> <!-- 2 ways data binding -->
+            +
+            <input type="number" v-model="secondNombre">
+            =
+            {{ result() }}
+
+        </form>
+    </div>
+
+
+
+    <script>
+        let app = Vue.createApp({
+            data() {
+
+                return {
+                    premierNombre: 0,
+                    secondNombre: 0,
+                }
+            },
+            methods: {
+                result: function () {
+                    return this.premierNombre + this.secondNombre
+                }
+            }
+        }).mount('#app')
+
+        setInterval(() => {
+            app.premierNombre += 1
+        }, 1000)
+    </script>
+</body>
+
+</html>

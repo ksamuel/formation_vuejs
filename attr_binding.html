@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Attribute binding</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<!-- exercice : faire un bouton avec un compte à rebour de 5 à 0, qui
+se désactive quand on arrive à 0 -->
+
+<body>
+    <div id="app">
+        <p>Ceci est le logo de vue js:</p>
+        <!-- on utilise la directive v-bind 
+        <p><img v-bind:src="url"></p>
+        -->
+        <p><img :src="url"></p>
+    </div>
+
+
+
+    <script>
+        let app = Vue.createApp({
+            data() {
+                return {
+                    url: "logo.png"
+                }
+            }
+        }).mount('#app')
+
+        setInterval(() => {
+            if (app.url === "logo.png") {
+                app.url = "inverted_logo.png"
+            } else {
+                app.url = "logo.png"
+            }
+            // app.url = app.url === "logo.png" ? "inverted_logo.png" : "logo.png"
+        }, 1000)
+
+    </script>
+</body>
+
+</html>

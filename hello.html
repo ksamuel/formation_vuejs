@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ message }}</h1>
+        <p>{{ 1 + 1}}</p>
+        <p>{{ date }}</p>
+    </div>
+
+
+
+    <script>
+        Vue.createApp({
+            data() {
+                let today = new Date()
+                return {
+                    message: "coucou",
+                    date: today
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

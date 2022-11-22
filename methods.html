@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Boucles</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+
+</head>
+
+<!--
+    Exercice:  
+    - faire une liste de couleur
+    - afficher les deux fois dans le template: une en majuscule avec une methode, une fois en minuscule avec une computed property
+-->
+
+<body>
+    <div id="app">
+
+        <p>{{ counter }}</p>
+
+        <p>Fruits:</p>
+
+        <ul>
+            <li v-for="fr, index in sortedFruits()" :key="fr">
+                [{{index + 1}}] - Manger, ceci est mon fruit: {{ fr }}
+            </li>
+        </ul>
+
+        <ul>
+            <li v-for="fr, index in computedSortedFruits" :key="fr">
+                [{{index + 1}}] - Manger, ceci est mon fruit: {{ fr }}
+            </li>
+        </ul>
+
+
+    </div>
+
+    <script>
+        let app = Vue.createApp({
+            data() {
+                return {
+                    fruits: ["pommes", "bananes", "poires", "fraises", "kiwis"],
+                    counter: 0
+                }
+            },
+            methods: {
+
+                sortedFruits() {
+                    console.log("sorted")
+                    return this.fruits.sort()
+                }
+
+            },
+            computed: {
+                computedSortedFruits: function () {
+                    console.log("computed sorted")
+                    return this.fruits.sort()
+                }
+            }
+        }).mount('#app')
+
+        setInterval(() => {
+            app.counter += 1
+        }, 1000)
+
+
+
+    </script>
+</body>
+
+</html>

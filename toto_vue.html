@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Todo Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <form action="" @submit.prevent="addTask()">
+            <p>
+                <input type="text" v-model="newTask">
+                <button>Add</button>
+            </p>
+        </form>
+        <ul>
+            <li v-for="task in filteredTasks">
+                <input type="checkbox" name="" id=""><label>{{task}}</label>
+            </li>
+        </ul>
+        <p>
+            Filter: <input type="text" v-model="filter">
+        </p>
+    </div>
+
+
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    tasks: ["Acheter du lait", "Faire la lessive"],
+                    newTask: "",
+                    filter: ""
+                }
+            },
+            methods: {
+                addTask() {
+                    this.tasks.push(this.newTask)
+                    this.newTask = ""
+                }
+            },
+            computed: {
+                filteredTasks() {
+                    if (!this.filter) {
+                        return this.tasks
+                    }
+                    return this.tasks.filter((t) => t.toLowerCase().includes(this.filter.toLowerCase()))
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

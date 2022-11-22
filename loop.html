@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Boucles</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+
+</head>
+
+<!--
+    Exercice: faire un compte à rebourg de 5 à 0 où les chiffres s'affichent
+    les uns en dessous des autres
+-->
+
+<body>
+    <div id="app">
+        <p>Nombres:</p>
+        <ul>
+            <li v-for="i in 5">
+                Le numero est: {{i}}
+            </li>
+        </ul>
+
+        <p>Fruits:</p>
+        <ul>
+            <li v-for="fr, index in fruits" :key="fr">
+                [{{index + 1}}] - Manger, ceci est mon fruit: {{ fr }}
+            </li>
+        </ul>
+
+        <p>Liste modifiée en temps reel:</p>
+        <ul>
+            <li v-for="element in liste">
+                {{element}}
+            </li>
+        </ul>
+
+        <p>Films</p>
+        <ul>
+            <li v-for="value, key  in scores">
+                {{key}}: {{value}} points
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        let app = Vue.createApp({
+            data() {
+                return {
+                    fruits: ["pommes", "bananes", "poires", "fraises", "kiwis"],
+                    liste: ['Premier élément'],
+                    scores: {
+                        "Thor: love and thunder": 4,
+                        "Everything, everywhere, all at once": 8
+                    },
+                }
+            }
+        }).mount('#app')
+
+        setInterval(() => {
+            app.liste.push('... et un autre!')
+            app.liste[0] = "Tout le monde peut changer !"
+        }, 1000)
+
+    </script>
+</body>
+
+</html>

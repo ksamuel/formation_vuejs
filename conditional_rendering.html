@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Conditional rendering</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <style>
+        .alert {
+            border: 5px red dotted;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="app">
+        <h1 v-if="displayTitle">Ceci est le logo de vue js:</h1>
+        <h1 v-else>Ceci s'affiche quand displayTitle est false</h1>
+
+        <p :class="{alert: displayTitle}">
+            <img src="logo.png">
+        </p>
+    </div>
+
+
+
+    <script>
+        let app = Vue.createApp({
+            data() {
+                return {
+                    displayTitle: true
+                }
+            }
+        }).mount('#app')
+
+        setInterval(() => {
+            app.displayTitle = !app.displayTitle
+        }, 1000)
+
+    </script>
+</body>
+
+</html>

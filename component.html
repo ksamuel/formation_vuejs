@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+
+    <!-- Exercice: 
+    - faire un component
+    - une horloge qui afficher l'heure sous cette forme: HH:MM:SS 
+    - avec une props "decalageHoraire" qui est un nombre d'heures 
+      qui est ajouté ou retiré à l'horloge 
+    - mettre 4 horloges dans la page
+    -->
+
+    <div id="app">
+        <p>
+            <bomb :counter="3"></bomb>
+        </p>
+        <p>
+            <bomb></bomb>
+        </p>
+        <p>
+            <bomb :counter="10"></bomb>
+        </p>
+    </div>
+
+
+
+    <script>
+        let app = Vue.createApp({})
+
+
+        // https://vuejs.org/guide/essentials/lifecycle.html
+        app.component('bomb', {
+            props: {
+                counter: {
+                    default: 5,
+                    type: Number
+                }
+            },
+            data() {
+                return {
+                    text: `Arrêtez-moi avant ${this.counter} seconde sinon j'explose !`,
+                    stopped: false,
+                    timeoutId: null
+                }
+            },
+            methods: {
+                desamorcer() {
+                    this.text = "Ouf..."
+                    this.stopped = true
+                }
+            },
+            mounted: function () {
+                this.timeoutId = setTimeout(() => {
+                    if (!this.stopped) {
+                        this.text = "Boooom !"
+                    }
+                }, this.counter * 1000)
+            },
+            beforeUnmount: function () {
+                clearTimeout(this.timeoutId)
+            },
+            template: `
+            <button @click="desamorcer()">{{text}}</button>
+            `
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+
+</html>

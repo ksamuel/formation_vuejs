@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Reactivité</title>
+
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1 id="app">
+        <!-- v-cloak permet de cacher des elements gérés par vuejs 
+        jusqu'à ce que vuejs soit chargé -->
+        <span v-cloak>Compteur:
+            {{ counter }}</span>
+
+    </h1>
+
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        let app = Vue.createApp({
+            data() {
+                return {
+                    counter: 0
+                }
+            }
+        }).mount('#app')
+
+
+        setInterval(() => {
+            app.counter += 1
+        }, 1000)
+    </script>
+</body>
+
+</html>
