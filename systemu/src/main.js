@@ -6,8 +6,10 @@ import Counter from './components/Counter.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
-    { path: '/', component: Counter },
-    { path: '/todo', component: Todo }
+
+    { path: '/count/:start(\\d+)', component: Counter, name: "counter-with-conf" },
+    { path: '/todo', component: Todo },
+    { path: '/', component: Counter, name: "counter" },
 ]
 
 const router = createRouter({

@@ -1,9 +1,9 @@
 <script setup>
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import Counter from './components/Counter.vue'
-import Todo from "./components/Todo.vue"
+
 import { RouterView, RouterLink } from 'vue-router';
+
 
 </script>
 
@@ -11,10 +11,16 @@ import { RouterView, RouterLink } from 'vue-router';
 
   <nav>
     <RouterLink to="/">Counter</RouterLink> |
+    <RouterLink to="/count/10">Counter à partir de 10</RouterLink> |
     <RouterLink to="/todo">Todo</RouterLink>
   </nav>
 
-  <RouterView></RouterView>
+  <RouterView :key="$route.fullPath" v-slot="{ Component }">
+    <KeepAlive>
+      <component :is="Component" />
+    </KeepAlive>
+  </RouterView>
+
 </template>
 
 <style scoped>

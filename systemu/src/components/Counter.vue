@@ -1,7 +1,14 @@
-<script setup>
-import { ref } from 'vue'
+ 
+<script>
+export default {
 
-const count = ref(0)
+  data() {
+    let initialValue = this.$route.params.start | 0;
+    return {
+      count: initialValue
+    }
+  },
+}
 </script>
 
 <template>
