@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+
+    <!-- Exercice: 
+    - faire une horloge avec lot
+    -->
+
+    <div id="app">
+        <p>
+            <bomb :counter="3">
+                <template #default="objet_du_slot">
+                    Message de la bombe: {{objet_du_slot.message}}
+                </template>
+            </bomb>
+        </p>
+        <p>
+            <bomb></bomb>
+        </p>
+        <p>
+            <bomb :counter="10"></bomb>
+        </p>
+    </div>
+
+
+
+    <script>
+        let app = Vue.createApp({})
+
+
+        // https://vuejs.org/guide/essentials/lifecycle.html
+        app.component('bomb', {
+            props: {
+                counter: {
+                    default: 5,
+                    type: Number
+                },
+            },
+            data() {
+                return {
+                    text: `Arrêtez-moi avant ${this.counter} seconde sinon j'explose !`,
+                    stopped: false,
+                    timeoutId: null
+                }
+            },
+            methods: {
+                desamorcer() {
+                    this.text = "Ouf..."
+                    this.stopped = true
+                }
+            },
+            mounted: function () {
+                this.timeoutId = setTimeout(() => {
+                    if (!this.stopped) {
+                        this.text = "Boooom !"
+                    }
+                }, this.counter * 1000)
+            },
+            beforeUnmount: function () {
+                clearTimeout(this.timeoutId)
+            },
+            template: `
+            <button @click="desamorcer()">
+                <slot v-bind="{'message': text}">{{text}}</slot>
+            </button>
+            `
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+
+</html>

@@ -24,7 +24,7 @@
         </form>
         <ul>
             <li v-for="task in filteredTasks">
-                <task :key="task.uid" :text="task.text" :done="task.done" :toggle-depuis-enfant="toggleTaskFromParent"
+                <task :key="task.uid" :text="task.text" :done="task.done" :callback-du-parent="toggleTaskFromParent"
                     :uid="task.uid"></task>
             </li>
         </ul>
@@ -88,7 +88,7 @@
                     type: Boolean,
                     required: true
                 },
-                toggleDepuisEnfant: {
+                callbackDuParent: {
                     type: Function,
                     required: true
                 },
@@ -99,7 +99,7 @@
             },
             template: `
                 <li>
-                    <input type="checkbox" :value="done"  :checked="done"  @change="toggleDepuisEnfant(uid)"  />
+                    <input type="checkbox" :value="done"  :checked="done"  @change="callbackDuParent(uid)"  />
                     <label :class="{done: done}">{{text}}</label>
                 </li>
             `

@@ -24,7 +24,11 @@
         </form>
         <ul>
             <li v-for="task in filteredTasks">
-                <task :key="task.uid" :text="task.text" v-model:done="task.done" :uid="task.uid"></task>
+                <task :key="task.uid" v-model:done="task.done" :uid="task.uid">
+                    <template #default="espace_memoire_du_slot">
+                        A faire: {{ task.text }}
+                    </template>
+                </task>
             </li>
         </ul>
         <p>
@@ -93,7 +97,9 @@
             template: `
                 <li>
                     <input type="checkbox" :value="done"  :checked="done"  @change="$emit('update:done', !done)"  />
-                    <label :class="{done: done}">{{text}}</label>
+                    <label :class="{done: done}">
+                        <slot>{{text}}</slot>
+                    </label>
                 </li>
             `
         })
