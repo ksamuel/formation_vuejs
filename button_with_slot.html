@@ -16,6 +16,7 @@
     <div id="app">
         <p>
             <bomb :counter="3">
+                <template #header=>Titre de la bombe: alert !</template>
                 <template #default="objet_du_slot">
                     Message de la bombe: {{objet_du_slot.message}}
                 </template>
@@ -67,8 +68,9 @@
                 clearTimeout(this.timeoutId)
             },
             template: `
+            <slot name="header"></slot>
             <button @click="desamorcer()">
-                <slot v-bind="{'message': text}">{{text}}</slot>
+                <slot   v-bind="{'message': text}">{{text}}</slot>
             </button>
             `
         })
