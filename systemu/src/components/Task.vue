@@ -1,27 +1,35 @@
-<script setup>
+<script>
 
-import { defineProps, defineEmits } from 'vue';
+import { mapActions, mapStores } from 'pinia';
+import { useTaskStore } from '../stores/taskStore';
 
-const props = defineProps({
+export default {
+    props: {
 
-    done: {
-        type: Boolean,
-        required: true
+        done: {
+            type: Boolean,
+            required: true
+        },
+
+        uid: {
+            type: Number,
+            required: true
+        }
     },
+    emits: ["update:done"],
 
-    uid: {
-        type: Number,
-        required: true
+    methods: {
+        ...mapActions(useTaskStore, ["toggleTask"])
     }
-})
 
-const emits = defineEmits(["update:done"])
+}
+
 
 
 </script>
 <template>
 
-    <input type="checkbox" :value="done" :checked="done" @change="$emit('update:done', !done)" />
+    <input type="checkbox" :value="done" :checked="done" @click="toggleTask(uid)" />
     <label :class="{ done: done }">
         <slot>{{ text }}</slot>
     </label>

@@ -15,10 +15,9 @@ import { RouterView, RouterLink } from 'vue-router';
     <RouterLink to="/todo">Todo</RouterLink>
   </nav>
 
-  <RouterView :key="$route.fullPath" v-slot="{ Component }">
-    <KeepAlive>
-      <component :is="Component" />
-    </KeepAlive>
+  <RouterView :key="$route.fullPath">
+
+
   </RouterView>
 
 </template>

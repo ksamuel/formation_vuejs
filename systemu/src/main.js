@@ -3,6 +3,7 @@ import './style.css'
 import App from './App.vue'
 import Todo from './components/Todo.vue'
 import Counter from './components/Counter.vue'
+import { createPinia } from 'pinia'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
@@ -17,8 +18,13 @@ const router = createRouter({
     routes
 })
 
+
+
 let app = createApp(App)
 
+const pinia = createPinia()
+
 app.use(router)
+app.use(pinia)
 
 app.mount('#app')

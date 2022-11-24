@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@vue/composition-api": "^1.7.1",
+    "pinia": "^2.0.26"
+  }
+}
