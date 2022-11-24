@@ -31,6 +31,8 @@
         <p>
             Filter: <input type="text" v-model="filter">
         </p>
+
+        <button>Button qui ne sert à rien</button>
     </div>
 
 
@@ -103,6 +105,14 @@
                     <label :class="{done: done}">{{text}}</label>
                 </li>
             `
+        })
+
+        app.directive("pin", {
+            mounted: function (el, binding, vnode) {
+                el.style.position = "fixed"
+                el.style.top = `${binding.value}%`
+                el.style.left = `${binding.value}%`
+            }
         })
 
         app.mount('#app')
